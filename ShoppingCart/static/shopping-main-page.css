@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+.wrapper{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* align-content: center; */
+    padding: 5%;
+    align-content: space-around;
+    gap: 50px;
+    
+}
+.card{
+    width: 15rem;
+    height: 22rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    
+}
+.card-img-top{
+    width:min-content;
+}
+h1{
+    text-align: center;
+}
