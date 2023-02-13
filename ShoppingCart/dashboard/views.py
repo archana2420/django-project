@@ -96,18 +96,28 @@ def order_history_view(request):
     user = User.objects.get(username=request.user)
     
     orders = Order.objects.filter(user_id=user.id)
+    
     if orders:
         orders_list = []
         for order in orders:
+            order_dict = model_to_dict(order)
+           
+            order_date = str(order_dict['order_date'])
             orderDetails = OrderDetail.objects.filter(order_id=order)
-            orderDetails_copy = model_to_dict(orderDetails)
-            product = Product.objects.get(id=orderDetails_copy['product_id'])
-            product_dict = product.__dict__
-            product_name = product_dict['name']
-            orderDetails_copy['name'] = product_name
-            orders_list.append(orderDetails_copy)
+           
             
+            for eachOrder in orderDetails:
+                
+                orderDetails_copy = model_to_dict(eachOrder)
+                product = Product.objects.get(id=orderDetails_copy['product_id'])
+                product_dict = product.__dict__
+                product_name = product_dict['name']
+                orderDetails_copy['name'] = product_name
+                orderDetails_copy['date'] = order_date
+                orders_list.append(orderDetails_copy)
+                
        
+
         
         context = {
             "orders_list":orders_list
