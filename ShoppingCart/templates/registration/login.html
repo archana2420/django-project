@@ -18,11 +18,11 @@
                 {%  csrf_token    %}
                 <div class="mb-3">
                     <label for="inputUsername" class="form-label">Username:</label>
-                    <input type="text" class="form-control" id="inputUsername" name="username">
+                    <input type="text" class="form-control" id="inputUsername" name="username" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="inputPassword" name="password">
+                <input type="password" class="form-control" id="inputPassword" name="password" required>
                 </div>
                 <div class="box-button">
                     <button class="btn btn-primary btn-block " type="submit">Login</button>
@@ -36,6 +36,8 @@
             
         </div>
     </div>
-    
+    <script>
+        sessionStorage.setItem('Cart',JSON.stringify([]))
+    </script>
 </body>
 </html>

@@ -1,0 +1,95 @@
+{%  load static    %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'checkout.css'    %}" >
+    <title>Checkout</title>
+    
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div class="wrapper">
+        
+        <div class="card-one">
+            <h5 class="card-title "> Fill in Details</h5>
+            <form method="post">
+                {%  csrf_token    %}
+               
+                <div class="form-group ">
+                    <label >Card No:</label>
+                    <input name="card-no" class="form-control" type="text"  value="" placeholder="Enter Card Number" required>
+                </div>
+                <div class="form-group">
+                    <label>Expiry Date:</label>
+                    <input name="expiry-date" class="form-control" type="date"  value="" required>
+                </div>
+                <div class="form-group">
+                    <label>CVV:</label>
+                    <input name="cvv" class="form-control" type="number"  value=""  placeholder="Enter CVV" required >
+                </div>
+                <div class="form-group ">
+                    <label >Address:</label>
+                    <input name="address" class="form-control" type="text" placeholder="Enter Address" required></input>
+                   
+                </div>
+                <div class="form-group ">
+                    <label >City:</label>
+                    <input name="city" class="form-control" type="text"  value="" placeholder="Enter City " required>
+                </div>
+                <div class="form-group ">
+                    <label >State:</label>
+                    <input name="state" class="form-control" type="text"  value="" placeholder="Enter State " required>
+                </div>
+                <div class="form-group ">
+                    <label >Zip Code:</label>
+                    <input name="zipcode" class="form-control" type="text"  value="" placeholder="Enter Zipcode" required>
+                </div>
+                <div class="box-button">
+                    <button class="btn btn-primary btn-block mt-3 float-end" type="submit" onclick="emptyCart()">Pay ₹{{total}}</button>
+        
+                </div>
+            </form>
+        </div>
+        <div class="card-two">
+            <table class="table table-hover ">
+                <thead class="h5">
+                    <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Item</th> 
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            
+                      
+                    </tr>
+                  
+                </thead>
+                <tbody class="table-group-divider">
+                    {%  for item in cart_items    %}
+                    <tr>
+                        <td class="item-image"><img src="{{item.image}}" ></td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>₹{{item.price}}</td>
+                        
+                    </tr>
+                       
+                    {%  endfor    %}
+                    <tr>
+                        <td colspan="2" ></td>
+                        <td>Total:</td>
+                        <td >₹{{total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
+       </div>
+       <script>
+        sessionStorage.setItem('Cart',JSON.stringify([]))
+    </script>
+</body>
+</html>
